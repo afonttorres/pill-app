@@ -33,6 +33,7 @@ export const views = [
     },{
         name: 'dayForm', view: ()=>{
             let title = 'Set your day!'
+            formContents.dayForm.add_a_pill.content = JSON.parse(localStorage.getItem('pills')).map(p => p.name);
             let form = new Form({day: formContents.dayForm});
             let el = [elements.title(title), elements.form(form)];
             return new View('dayForm', el, form.catchData);

@@ -6,6 +6,6 @@ export const formContents = {
         when: { type: 'text', content: ['morning', 'noon', 'afternoon', 'night'] }
     },
     dayForm: {
-        add_a_pill: { type: 'text', content: JSON.parse(localStorage.getItem('pills')).map(p => p.name)}
+        add_a_pill: { type: 'text', content: [] }
     }
 }

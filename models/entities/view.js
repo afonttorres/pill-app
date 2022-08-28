@@ -1,9 +1,15 @@
 export class View {
     output;
-    callback;
     name;
+    callback;
 
-    constructor(elements, callback) {
+
+    constructor(name, elements, callback) {
+        if (!name) {
+            alert('Name is mandatory!');
+            return;
+        }
+        this.name = name;
         this.callback = callback;
         this.createView(elements);
     }

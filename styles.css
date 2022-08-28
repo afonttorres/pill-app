@@ -9,6 +9,7 @@ body,
     position: fixed;
     top: 0;
     left: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .app {
@@ -32,9 +33,33 @@ body,
     filter: blur(2px);
 }
 
-.col {
+.col,
+.row {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5%;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.delete-btn {
+    font-size: medium;
+    color: indianred;
+    opacity: 1;
+    scale: 1;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.delete-btn:hover {
+    scale: .85;
+    opacity: .85;
+}
+
+.pill span {
+    font-size: x-small;
 }

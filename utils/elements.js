@@ -1,3 +1,4 @@
+import { callbacks } from "./callbacks.js"
 import { styleUtil } from "./style.js"
 
 export const elements = {
@@ -10,7 +11,8 @@ export const elements = {
         </select>`
     },
     label(field) {
-        return `<label for="${field}">${field}</label>`
+        let content = field.includes('_') ? field.split('_').join(' ') : field;
+        return `<label for="${field}">${content}</label>`
     },
     formControl(fieldName, field) {
         return `<div class="form-control col">
@@ -27,10 +29,10 @@ export const elements = {
     title(str) {
         return `<h1>${str}</h1>`
     },
-    subtitle(str){
+    subtitle(str) {
         return `<h5>${str}</h5>`
     },
-    button(content){
+    button(content) {
         return `<button>${content}</button>`
     },
     pill(pill) {
@@ -45,15 +47,11 @@ export const elements = {
         '`
 
         return `
-            <article class="col">
-            ${pill.shape !== 'heart' ? `<div style=${style}></div>` : `<span style="color: ${pill.color}"><3</span>`}
-                <span>${pill.name}</span>
-                <span>${pill.when}</span>
-            </article>
+            ${pill.shape !== 'heart' ? `<div class="pill col" style=${style}><span>${pill.name}</span></div>` : `<span style="color: ${pill.color}"><3</span>`}     
         `
     },
 
     pills(pills) {
-        return `<div>${pills.map(p => this.pill(p)).join('')}</div>`;
+        return `<div class="col">${pills.map((p) => (`<div id="${p.name}" class="row">${this.pill(p)}<i class="fa-solid fa-trash-can delete-btn"></i></div>`)).join('')}</div>`;
     }
 }

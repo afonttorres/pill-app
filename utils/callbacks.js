@@ -2,6 +2,9 @@ import { Pill } from "../models/entities/pill.js"
 import { elements } from "./elements.js";
 
 export const callbacks = {
+    landing(){
+
+    },
     pill(data) {
         let { shape, color, name, when } = data.pill;
         let pill = new Pill(shape, color, name, when);
@@ -16,5 +19,3 @@ export const callbacks = {
 
     }
 }
-
-//

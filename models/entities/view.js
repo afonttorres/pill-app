@@ -1,6 +1,7 @@
 export class View {
     output;
     callback;
+    name;
 
     constructor(elements, callback) {
         this.callback = callback;

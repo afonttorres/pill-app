@@ -27,6 +27,12 @@ export const elements = {
     title(str) {
         return `<h1>${str}</h1>`
     },
+    subtitle(str){
+        return `<h5>${str}</h5>`
+    },
+    button(content){
+        return `<button>${content}</button>`
+    },
     pill(pill) {
         let wider = ['oval', 'rectangle', 'cylinder'];
 

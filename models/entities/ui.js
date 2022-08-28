@@ -10,7 +10,11 @@ export class UI {
             this.view = view;
             return;
         }
-        view ? this.view = view : this.view = this.views.pillForm();
+        view ? this.view = view : this.view = this.views.landing();
+    }
+
+    nextView = () => {
+        Object.keys(views.sum).map(view => console.log(views.sum.indexOf(views.sum[view])))
     }
 
     setView = (view) => {
@@ -21,7 +25,8 @@ export class UI {
     renderView = () => {
         if (!this.view) return;
         this.container.innerHTML = this.view.output;
-        if (!this.view.callback) return;
-        document.querySelector('button').onclick = (e) => this.view.callback(e);
+        document.querySelector('button').onclick = this.view.callback ?
+            (e) => this.view.callback(e) :
+            () => this.nextView();
     }
 }

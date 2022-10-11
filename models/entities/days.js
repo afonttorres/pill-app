@@ -37,9 +37,10 @@ export class Day {
     }
 
     pillsByRange(range) {
-        return Object.keys(this.ranges[range])
+        let test = [];
+        Object.keys(this.ranges[range])
             .map(h => this.ranges[range][h])
-            .filter(s => s.length > 0)
-            .map(i =>  i[0])
+            .map(h => h.map(i => test.push(i)))
+        return test;
     };
 }

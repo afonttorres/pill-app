@@ -42,6 +42,7 @@ export const elements = {
         return `<button class="close-btn"><i class="fa-solid fa-x"></i></button>`
     },
     pill(pill) {
+        // console.log(pill)
         let wider = ['oval', 'rectangle', 'cylinder'];
         let style = `'
             background-color: ${pill.color};
@@ -58,7 +59,7 @@ export const elements = {
 
     pills(pills) {
         console.log(pills)
-        return `<div class="col">${pills.map((p) => (`<div id="${p.name}" class="row">${this.pill(p)}<i class="fa-solid fa-trash-can delete-btn"></i></div>`)).join('')}</div>`;
+        return `<div class="col">${pills.length > 0 && pills.map((p) => (`<div id="${p.name}" class="row">${this.pill(p)}<i class="fa-solid fa-trash-can delete-btn"></i></div>`)).join('')}</div>`;
     },
     day(day, key) {
         return `<article class="day" id="day-${key}">

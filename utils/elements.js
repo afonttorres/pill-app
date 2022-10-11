@@ -42,7 +42,6 @@ export const elements = {
         return `<button class="close-btn"><i class="fa-solid fa-x"></i></button>`
     },
     pill(pill) {
-        // console.log(pill)
         let wider = ['oval', 'rectangle', 'cylinder'];
         let style = `'
             background-color: ${pill.color};
@@ -58,30 +57,27 @@ export const elements = {
     },
 
     pills(pills) {
-        console.log(pills)
-        return `<div class="col">${pills.length > 0 && pills.map((p) => (`<div id="${p.name}" class="row">${this.pill(p)}<i class="fa-solid fa-trash-can delete-btn"></i></div>`)).join('')}</div>`;
+        // console.log(pills)
+        return `<div class="col">${pills.map((p) => (`<div id="${p.name}" class="row">${this.pill(p)}<i class="fa-solid fa-trash-can delete-btn"></i></div>`)).join('')}</div>`;
+    },
+    range(range, day) {
+        return `
+        <div class="range">
+            <span>${range}</span>
+            ${this.pills(day.pillsByRange(range))}
+        </div>`
+    },
+    ranges(day) {
+        return `
+        <div class="range-cnt">
+            ${Object.keys(day.ranges).map(range => (this.range(range, day))).join("")}
+        </div>`
     },
     day(day, key) {
-        return `<article class="day" id="day-${key}">
-        <span>${day.name}</span>
-            <div>
-                Morning
-                <div class="col">
-                ${this.pills(day.pillsByRange('morning'))}
-                </div>
-            </div>
-            <div>Noon
-            <div class="col">
-            ${this.pills(day.pillsByRange('noon'))}
-            </div></div>
-            <div>Afternoon
-            <div class="col">
-            ${this.pills(day.pillsByRange('afternoon'))}
-            </div></div>
-            <div>Night
-            <div class="col">
-            ${this.pills(day.pillsByRange('night'))}
-            </div></div>
+        return `
+        <article class="day" id="day-${key}">
+            <span>${day.name}</span>
+            ${this.ranges(day)}
         </article>`
     },
     week(week) {

@@ -26,12 +26,13 @@ export class Form {
         inputs.forEach(i => {
             data = { ...data, [i.name]: i.value }
         });
+
         if (this.validate(data)) {
             alert(this.validate(data));
             return;
         };
+        
         this.output = { [this.entity]: data };
         callbacks[this.entity](this.output);
-        
     }
 }

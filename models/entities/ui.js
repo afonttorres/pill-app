@@ -38,25 +38,30 @@ export class UI {
     }
 
     setView = (view) => {
-        console.log(view)
         this.view = view;
         this.renderView();
     }
 
     addCallback = () => {
         let btn = document.querySelectorAll('button');
-        btn.forEach(b => {
-            b.innerText.toLocaleLowerCase().includes('next') || btn.length <= 1 ?
-                b.onclick = this.view.callback ? (e) => { this.view.callback(e); this.nextView() } : () => this.nextView()
-                :
-                b.onclick = () => this.pastView();
-        })
+        let callback;
 
         window.onclick = (e) => {
-            if (!e.target.className.includes('btn')) return;
-            let foo = e.target.className.substring(e.target.className.lastIndexOf(' ') + 1, e.target.className.indexOf('-btn'));
-            callbacks[foo](e);
+            let target = e.path.filter(el => el.className && el.className.includes('btn'))[0];
+            if (!target) return;
+            let foo = target.className.substring(target.className.lastIndexOf(' ') + 1, target.className.indexOf('-btn'));
+            if (!foo || !callbacks[foo]) return;
+            callback = callbacks[foo];
+            callback(e) && callback(e).output ? this.setView(callback(e)) : (e) => callback(e);
         }
+
+        btn.forEach(b => {
+            b.onclick = b.innerText.toLocaleLowerCase().includes('submit') && this.view.callback ?
+                (e) => { this.view.callback(e); this.nextView() } :
+                b.innerText.toLocaleLowerCase().includes('next') || b.innerText.toLocaleLowerCase().includes('get started') ?
+                    () => this.nextView() : null;
+        })
+
     }
 
     renderView = () => {

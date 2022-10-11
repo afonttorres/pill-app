@@ -2,12 +2,17 @@ export class Pill {
     shape;
     color;
     name;
-    when;
+    days;
+    schedule;
 
-    constructor(shape, color, name, when) {
+    constructor(shape, color, name) {
         this.shape = shape;
         this.color = color;
         this.name = name;
-        this.when = when;
+    }
+
+    setSchedule(days, schedule) {
+        this.days = days;
+        this.schedule = schedule;
     }
 }

@@ -4,6 +4,8 @@ export class Day {
     name;
     schedule = {};
     ranges = { morning: {}, noon: {}, afternoon: {}, night: {} };
+    pillsAmount = 0;
+
     constructor(name) {
         this.name = name;
         this.createHours();
@@ -42,5 +44,15 @@ export class Day {
             .map(h => this.ranges[range][h])
             .map(h => h.map(i => test.push(i)))
         return test;
-    };
+    }
+
+    summary() {
+        let sum = {};
+        Object.keys(this.schedule).filter(s => {
+            if (this.schedule[s].length == 0) return;
+            sum = { ...sum, [s]: this.schedule[s] }
+        })
+        this.pillsAmount = Object.keys(sum).reduce((acc, v) => acc + sum[v].length, 0);
+        return sum;
+    }
 }

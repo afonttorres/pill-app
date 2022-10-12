@@ -328,3 +328,18 @@ footer{
 .current{
     color: indianred
 }
+
+.day-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.day-grid > span{
+    grid-column: 1/1;
+    grid-row: auto;
+}
+
+.day-grid > div{
+    grid-column: 2/3;
+    grid-row: auto;
+}

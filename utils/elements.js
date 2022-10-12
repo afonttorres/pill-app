@@ -106,19 +106,24 @@ export const elements = {
         </div>
         `
     },
-    detailDay(day){
-        console.log(day)
-    },
-    footerItem(v, current){
-        if(v.name.toLowerCase().includes("form") || v.name.toLowerCase().includes("landing")) return;
-        let icons = {pills: `<i class="fa-solid fa-pills"></i>`, week: `<i class="fa-solid fa-calendar-week"></i>`, day: `<i class="fa-solid fa-calendar-day"></i>`};
+    detailDay(day) {
+        let output = Object.keys(day.summary()).map(h => this.pills(day.summary()[h], "")).join("");
         return `
-        <div class="footerItem-btn ${current === v.name ? `current ${v.name}-view` : v.name+"-view"} col">
+        <div class="day-grid" style="grid-template-rows: repeat(${day.pillsAmount},1fr)"f>
+            ${Object.keys(day.summary()).map((h, i)=> `<span style="grid-row: ${i+1} / ${day.pillsAmount + 1} ">${h}</span>`).join("")}
+            ${output}
+        </div>`
+    },
+    footerItem(v, current) {
+        if (v.name.toLowerCase().includes("form") || v.name.toLowerCase().includes("landing")) return;
+        let icons = { pills: `<i class="fa-solid fa-pills"></i>`, week: `<i class="fa-solid fa-calendar-week"></i>`, day: `<i class="fa-solid fa-calendar-day"></i>` };
+        return `
+        <div class="footerItem-btn ${current === v.name ? `current ${v.name}-view` : v.name + "-view"} col">
             ${icons[v.name]}
             ${v.name}
         </div>`
     },
-    footer(current){
+    footer(current) {
         return `<footer class="row">${views.map(v => this.footerItem(v, current)).join("")}</footer>`
     }
 }

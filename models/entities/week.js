@@ -5,6 +5,5 @@ export class Week {
     days;
     constructor(){
         this.days = this.dayNames.map(d => new Day(d));
-        console.log(this.days)
     }
 }

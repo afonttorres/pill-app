@@ -1,4 +1,5 @@
 import { Week } from "../models/entities/week.js";
+import { views } from "../models/views.js";
 import { styleUtil } from "./style.js";
 
 export const elements = {
@@ -30,7 +31,7 @@ export const elements = {
         </div>`
     },
     title(str) {
-        return `<h1>${str}</h1>`
+        return `<h1 class="title">${str}</h1>`
     },
     subtitle(str) {
         return `<h5>${str}</h5>`
@@ -56,15 +57,14 @@ export const elements = {
         `
     },
 
-    pills(pills) {
-        // console.log(pills)
-        return `<div class="col">${pills.map((p) => (`<div id="${p.name}" class="row">${this.pill(p)}<i class="fa-solid fa-trash-can delete-btn"></i></div>`)).join('')}</div>`;
+    pills(pills, c) {
+        return `<div class="${c} col">${pills.map((p) => (`<div id="${p.name}" class="row">${this.pill(p)}<i class="fa-solid fa-trash-can delete-btn"></i></div>`)).join('')}</div>`;
     },
     range(range, day) {
         return `
         <div class="range">
             <span>${range}</span>
-            ${this.pills(day.pillsByRange(range))}
+            ${this.pills(day.pillsByRange(range), "")}
         </div>`
     },
     ranges(day) {
@@ -75,7 +75,7 @@ export const elements = {
     },
     day(day, key) {
         return `
-        <article class="day" id="day-${key}">
+        <article class="day pickDay-btn" id="day-${key}">
             <span>${day.name}</span>
             ${this.ranges(day)}
         </article>`
@@ -105,5 +105,20 @@ export const elements = {
             </form>
         </div>
         `
+    },
+    detailDay(day){
+        console.log(day)
+    },
+    footerItem(v, current){
+        if(v.name.toLowerCase().includes("form") || v.name.toLowerCase().includes("landing")) return;
+        let icons = {pills: `<i class="fa-solid fa-pills"></i>`, week: `<i class="fa-solid fa-calendar-week"></i>`, day: `<i class="fa-solid fa-calendar-day"></i>`};
+        return `
+        <div class="footerItem-btn ${current === v.name ? `current ${v.name}-view` : v.name+"-view"} col">
+            ${icons[v.name]}
+            ${v.name}
+        </div>`
+    },
+    footer(current){
+        return `<footer class="row">${views.map(v => this.footerItem(v, current)).join("")}</footer>`
     }
 }
